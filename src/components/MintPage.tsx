@@ -18,7 +18,7 @@ const MyForm: React.FC = () => {
     try {
       setIsPending(true);
       console.log(channelName);
-      const response = await axios.post('http://localhost:5000/mint', { 
+      const response = await axios.post('https://tokenserver-4u3r.onrender.com/mint', { 
         image,
         name,
         symbol,
