@@ -25,16 +25,34 @@ export const LiveVideo = (props: LiveVideoProps) => {
 
     const { publicKey } = useWallet();
     const base58Pubkey = publicKey.toBase58()
+    const [isPending, setIsPending] = useState(false);
+    const [applied, setApplied] = useState(false);
     
   const appId = '69c3c885e2ef4de5995793276cf21683'
   // const agoraEngine = useRTCClient( AgoraRTC.createClient({ codec: "vp8", mode: "rtc" })); // Initialize Agora Client
   const { channelName } = useParams() //pull the channel name from the param
+  const storePublicKey = async () => {
+    if (!isPending) {
+      try {
+        setIsPending(true);
+        console.log(channelName);
+        const response = await axios.post('https://tokenserver-4u3r.onrender.com/store-key', { publicKey: publicKey?.toString(), channelName: channelName });
+        console.log(response.data); // log the server response
+        setIsPending(false);
+        setApplied(true);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    
+  };
 // console.log(channelToken);
   // set the connection state
   const [activeConnection, setActiveConnection] = useState(true);
   useEffect(() => {
     // If the wallet is not connected, delete the public key from the server
-      axios.delete('http://localhost:5000/delete-key', { data: { publicKey: base58Pubkey } });
+      axios.delete('https://tokenserver-4u3r.onrender.cos/delete-key', { data: { publicKey: base58Pubkey } });
+      console.log('deleted');
   }, [activeConnection]);
 
 
@@ -103,6 +121,7 @@ export const LiveVideo = (props: LiveVideoProps) => {
               </button>
             </div>
             {/* <p>{props.token}</p> */}
+            {applied ? null : <button onClick={storePublicKey} {...{ disabled: isPending }}>{isPending ? 'applying' : 'Apply for NFT'}</button>}
             <button id="endConnection"
                 onClick={() => {
                   setActiveConnection(false)

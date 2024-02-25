@@ -1,8 +1,10 @@
 import  { useState } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+
 import { ConnectForm } from './components/ConnectForm';
 import { LiveVideo } from './components/LiveVideo';
 import CreateChannel from './components/CreateChannel';
+import MintPage from './components/MintPage';
 
 import AgoraRTC, {
   AgoraRTCProvider,
@@ -29,7 +31,7 @@ function App() {
   const agoraClient = useRTCClient( AgoraRTC.createClient({ codec: "vp8", mode: "rtc" })); // Initialize Agora Client
   const [channelTK, setChannelTK] = useState(''); // use useState for channelTK
 
-  const handleConnect = (channelName: string, channelToken: string ) => {
+  const handleConnect = async (channelName: string, channelToken: string ) => {
     setChannelTK(channelToken); // set channelTK using the setter from useState
     navigate(`/via/${channelName}`); // on form submit, navigate to new route
   }
@@ -41,13 +43,16 @@ function App() {
           <Navbar />
           <div className="content">
             <Routes>
-              <Route path='/' element={ <ConnectForm connectToVideo={ handleConnect } /> } />
+              // redirect "/" to "/home"
+              <Route path='/' element={<Navigate to='/home' />} />
+              <Route path='/home' element={ <ConnectForm connectToVideo={ handleConnect } /> } />
               <Route path='/via/:channelName' element={
                 <AgoraRTCProvider client={agoraClient}>
                   <LiveVideo token={channelTK} />
                 </AgoraRTCProvider>
               } />
               <Route path='/newChannel' element={ <CreateChannel /> } />
+              <Route path='/mint' element={ <MintPage /> } />
             </Routes>
           </div>
         </WalletModalProvider>

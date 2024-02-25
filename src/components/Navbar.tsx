@@ -1,6 +1,6 @@
 // import {useEffect} from 'react';
-import { useWallet } from "@solana/wallet-adapter-react";
-import axios from 'axios'; // for making HTTP requests
+// import { useWallet } from "@solana/wallet-adapter-react";
+// import axios from 'axios'; // for making HTTP requests
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useNavigate, useLocation } from "react-router-dom";
 import "@solana/wallet-adapter-react-ui/styles.css"; 
@@ -8,15 +8,8 @@ import "@solana/wallet-adapter-react-ui/styles.css";
 const Navbar = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const {  publicKey } = useWallet(); // get the public key from the wallet
-    const storePublicKey = async () => {
-        try {
-          const response = await axios.post('https://tokenserver-4u3r.onrender.com/store-key', { publicKey: publicKey?.toString(), channelName: 'MAIN' });
-          console.log(response.data); // log the server response
-        } catch (error) {
-          console.error(error);
-        }
-      };
+    // const {  publicKey } = useWallet(); // get the public key from the wallet
+ 
     // useEffect(() => {
     //     // If the wallet is not connected, delete the public key from the server
     //     if (!connected || !publicKey) {
@@ -30,9 +23,9 @@ const Navbar = () => {
     return ( 
         <div className="navbar">
             <WalletMultiButton/>
-            {location.pathname !== '/' && <button onClick={() => navigate('/')}>Home</button>}
+            {location.pathname !== '/home' && <button onClick={() => navigate('/')}>Home</button>}
             {location.pathname !== '/newChannel' && <button onClick={() => navigate('/newChannel')}>Create Channel</button>}
-            <button onClick={storePublicKey}>Store Public Key</button>
+            {location.pathname !== '/mint' && <button onClick={() => navigate('/mint')}>Mint</button>}            
         </div>
      );
 }

@@ -103,4 +103,14 @@ body {
   min-width: 360px;
   overflow: hidden;
 }
+.dropzone {
+  cursor: pointer;
+  /* padding: 10rem; */
+  border: 1px solid #eaeaea;
+  border-radius: 5px;
+  border-style:dashed;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
 

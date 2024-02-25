@@ -12,6 +12,7 @@ export const ConnectForm = ({ connectToVideo } : ConnectFormProps) => {
   const [channelToken, setChannelToken] = useState('')
   
   const handleConnect = async (e: React.FormEvent<HTMLFormElement>) => {
+    
     // trim spaces
     const trimmedChannelName = channelName.trim()
     // await storePublicKey() 
