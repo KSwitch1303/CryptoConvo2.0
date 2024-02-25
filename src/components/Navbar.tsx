@@ -23,7 +23,7 @@ const Navbar = () => {
     return ( 
         <div className="navbar">
             <WalletMultiButton/>
-            {location.pathname !== '/home' && <button onClick={() => navigate('/')}>Home</button>}
+            {location.pathname !== '/' && <button onClick={() => navigate('/')}>Home</button>}
             {location.pathname !== '/newChannel' && <button onClick={() => navigate('/newChannel')}>Create Channel</button>}
             {location.pathname !== '/mint' && <button onClick={() => navigate('/mint')}>Mint</button>}            
         </div>

@@ -29,7 +29,7 @@ const MyForm: React.FC = () => {
       setIsPending(false);
       setMinted(true);
       alert('NFT(s) Minted');
-      navigate('/home');
+      navigate('/');
     } catch (error) {
       console.error(error);
     }

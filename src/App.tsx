@@ -1,5 +1,5 @@
 import  { useState } from 'react';
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import { ConnectForm } from './components/ConnectForm';
 import { LiveVideo } from './components/LiveVideo';
@@ -43,9 +43,7 @@ function App() {
           <Navbar />
           <div className="content">
             <Routes>
-              // redirect "/" to "/home"
-              <Route path='/' element={<Navigate to='/home' />} />
-              <Route path='/home' element={ <ConnectForm connectToVideo={ handleConnect } /> } />
+              <Route path='/' element={<ConnectForm connectToVideo={ handleConnect } />} />
               <Route path='/via/:channelName' element={
                 <AgoraRTCProvider client={agoraClient}>
                   <LiveVideo token={channelTK} />
