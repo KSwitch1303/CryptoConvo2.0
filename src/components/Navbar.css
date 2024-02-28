@@ -1,0 +1,49 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  color: #fff;
+  border-radius: 20px;
+  box-shadow:
+    0 4px 6px rgba(138, 43, 226, 0.5),
+    0 1px 3px rgba(138, 43, 226, 0.3); /* Shiny purple box shadow */
+  max-width: 1200px; /* Limiting the width to 1200px */
+  margin: 20px auto; /* Centering the navbar horizontally and adding some margin */
+  font-family: "Roboto", sans-serif; /* Change font to Roboto */
+}
+
+.navbar button {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease; /* Added transform for button hover animation */
+  border-radius: 5px;
+  margin-left: 10px; /* Add spacing between buttons */
+}
+
+.navbar button:first-child {
+  margin-left: 0; /* No left margin for the first button */
+}
+
+.navbar button:hover {
+  background-color: #2980b9; /* Lighter background on hover */
+  transform: translateY(-2px); /* Move the button slightly up on hover */
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .navbar button {
+    margin: 10px; /* Add space around buttons */
+  }
+}
